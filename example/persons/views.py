@@ -2,8 +2,8 @@ from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader, RequestContext
 
-from app.models import Person
-from app.forms import AddPersonForm, RemovePersonForm
+from persons.models import Person
+from persons.forms import AddPersonForm, RemovePersonForm
 
 def index(request):
     t = loader.get_template('index.html')
@@ -37,9 +37,9 @@ def manage_persons(request):
 
     form_rem = RemovePersonForm(form_data)
     if form_rem.is_valid():
-        person_to_be_removed = Person.objects.get(
+        persons_to_be_removed = Person.objects.filter(
                     short_name__icontains=form_data.get('short_name_substr'))
-        person_to_be_removed.delete() # delete row from DB
+        persons_to_be_removed.delete() # delete row from DB
         return redirect('/persons/')
 
     t = loader.get_template('manage.html')
