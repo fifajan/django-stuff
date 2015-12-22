@@ -9,8 +9,25 @@ def index(request):
     t = loader.get_template('index.html')
     return HttpResponse(t.render(RequestContext(request, {})))
 
-def all_persons(request):
+def list_persons(request):
+    GET_SHORT_NAME = 'short'
+    GET_FULL_NAME = 'full'
+    GET_EMAIL = 'mail'
+
+    get_params = { GET_SHORT_NAME : request.GET.get(GET_SHORT_NAME),
+                    GET_FULL_NAME : request.GET.get(GET_FULL_NAME),
+                    GET_EMAIL : request.GET.get(GET_EMAIL) }
+
+    filter_strings = { GET_SHORT_NAME : 'short_name__icontains',
+                        GET_FULL_NAME : 'full_name__icontains',
+                        GET_EMAIL : 'email__icontains' }
+
     persons = Person.objects.all()    
+
+    for param in get_params:
+        if get_params[param]:
+            filter_dict = { filter_strings[param] : get_params[param] }
+            persons.filter(**filter_dict)
 
     context_dict = {}
     context_dict['persons'] = persons
