@@ -1,0 +1,27 @@
+#! /usr/bin/python
+
+# import and setup Django environment (as "./manage.py shell does):
+from sys import argv, path as sys_path
+import os
+import django
+
+sys_path.append('/home/fifajan/gh/django-stuff/example')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example.settings")
+django.setup()
+
+# actual import script:
+from persons.models import Person
+
+if __name__ == '__main__':
+    if len(argv) != 2:
+        print 'USAGE: $ ./import.py /some/path/file.txt'
+    else:
+        imported_persons_count = 0
+        with file(argv[1]) as input_file:
+            for line in input_file:
+                short, full, mail = line.split('\t')
+                person = Person(short_name=short, full_name=full, email=mail)
+                person.save() # write new row to DB
+                imported_persons_count += 1
+
+        print 'Imported %s persons.' % imported_persons_count
