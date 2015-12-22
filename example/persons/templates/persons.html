@@ -5,10 +5,12 @@
     <body>
         <h1><a href="/manage">Manage persons</a></h1>
         <h1>Persons ({{ persons_count }}):</h1>
-        <h2><ol>
+        {% if tiny_font %}<h5>{% else %}<h2>{% endif %}
+        <ol>
         {% for p in persons %}
             <li>{{ p }}</li>
         {% endfor %}
-        </ol></h2>
+        </ol>
+        {% if tiny_font %}</h5>{% else %}</h2>{% endif %}
     </body>
 </html>

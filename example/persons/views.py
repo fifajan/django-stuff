@@ -25,13 +25,17 @@ def list_persons(request):
     persons = Person.objects.all()    
 
     for param in get_params:
-        if get_params[param]:
+        print 'GET: %s = %s' % (param, get_params[param]) # for debug
+        if get_params.get(param):
             filter_dict = { filter_strings[param] : get_params[param] }
-            persons.filter(**filter_dict)
+            persons = persons.filter(**filter_dict)
 
     context_dict = {}
     context_dict['persons'] = persons
     context_dict['persons_count'] = len(persons)
+
+    # make list font tiny:
+    context_dict['tiny_font'] = request.GET.get('tiny')
 
     t = loader.get_template('persons.html')
     return HttpResponse(t.render(RequestContext(request, context_dict)))
