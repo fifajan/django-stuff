@@ -1,6 +1,6 @@
 #! /usr/bin/python
 
-# import and setup Django environment (as "./manage.py shell does):
+# import and setup Django environment (as "./manage.py shell" does):
 from sys import argv, path as sys_path
 import os
 import django
