@@ -24,8 +24,8 @@ def list_persons(request):
 
     persons = Person.objects.all()    
 
-    for param in get_params:
-        print 'GET: %s = %s' % (param, get_params[param]) # for debug
+    for param in sorted(request.GET):
+        print 'GET: %s = %s' % (param, request.GET.get(param)) # for debug
         if get_params.get(param):
             filter_dict = { filter_strings[param] : get_params[param] }
             persons = persons.filter(**filter_dict)
