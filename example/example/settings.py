@@ -53,6 +53,10 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+STATICFILES_DIRS = (
+    ('persons', '/home/fifajan/gh/django-stuff/example/persons/static'),
+)
+
 TEMPLATE_DIR = [os.path.join(BASE_DIR, 'templates')]
 
 ROOT_URLCONF = 'example.urls'
