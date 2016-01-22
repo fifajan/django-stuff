@@ -5,7 +5,7 @@ from sys import argv, path as sys_path
 import os
 import django
 
-sys_path.append('..')
+sys_path.append('/home/fifajan/gh/django-stuff/example')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example.settings")
 django.setup()
 
