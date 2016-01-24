@@ -25,7 +25,7 @@ def list_persons(request):
     persons = Person.objects.all()    
 
     for param in sorted(request.GET):
-        print 'GET: %s = %s' % (param, request.GET.get(param)) # for debug
+        print('GET: %s = %s' % (param, request.GET.get(param))) # for debug
         if get_params.get(param):
             filter_dict = { filter_strings[param] : get_params[param] }
             persons = persons.filter(**filter_dict)
@@ -44,7 +44,7 @@ def manage_persons(request):
     persons = Person.objects.all()
     form_data = request.POST if request.POST else None
     if form_data: # debug info
-        print form_data # POST data (for debug)
+        print(form_data) # POST data (for debug)
 
     form_add = AddPersonForm(form_data)
     if form_add.is_valid():
