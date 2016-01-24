@@ -1,8 +1,9 @@
 from django.conf.urls import patterns, url
+from persons.views import index, list_persons, manage_persons
 
-urlpatterns = patterns('',
-    url(r'^$', 'persons.views.index'),
+urlpatterns = [
+    url(r'^$', index),
 
-    url(r'^persons/$', 'persons.views.list_persons'),
-    url(r'^manage/$', 'persons.views.manage_persons'),
-)
+    url(r'^persons/$', list_persons),
+    url(r'^manage/$', manage_persons),
+]
