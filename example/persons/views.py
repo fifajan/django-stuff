@@ -22,7 +22,7 @@ def list_persons(request):
                         GET_FULL_NAME : 'full_name__icontains',
                         GET_EMAIL : 'email__icontains' }
 
-    persons = Person.objects.all()    
+    persons = Person.objects.all()
 
     for param in sorted(request.GET):
         print('GET: %s = %s' % (param, request.GET.get(param))) # for debug
@@ -67,6 +67,6 @@ def manage_persons(request):
     return HttpResponse(t.render(RequestContext(request,
                                        {'form_add' : form_add,
                                         'form_rem' : form_rem,
-                                        'persons_count' : len(persons),} 
+                                        'persons_count' : len(persons),}
                         )))
 
