@@ -6,5 +6,5 @@ urlpatterns = [
 
     url(r'^persons/$', list_persons),
     url(r'^manage/$', manage_persons),
-    url(r'^login/$', register),
+    url(r'^register/$', register),
 ]
