@@ -15,8 +15,10 @@ def register(request):
     # Like before, get the request's context.
     context = RequestContext(request)
 
-    # A boolean value for telling the template whether the registration was successful.
-    # Set to False initially. Code changes value to True when registration succeeds.
+    # A boolean value for telling the template whether the
+    # registration was successful.
+    # Set to False initially. Code changes value to True when
+    # registration succeeds.
     registered = False
 
     # If it's a HTTP POST, we're interested in processing form data.
@@ -37,13 +39,16 @@ def register(request):
             user.save()
 
             # Now sort out the UserProfile instance.
-            # Since we need to set the user attribute ourselves, we set commit=False.
-            # This delays saving the model until we're ready to avoid integrity problems.
+            # Since we need to set the user attribute ourselves, we set
+            # commit=False.
+            # This delays saving the model until we're ready to avoid
+            # integrity problems.
             profile = profile_form.save(commit=False)
             profile.user = user
 
             # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and put it in the UserProfile model.
+            # If so, we need to get it from the input form and put it in
+            # the UserProfile model.
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
 
@@ -70,7 +75,8 @@ def register(request):
     #return HttpResponse(t.render(RequestContext(request, context)))
     return render_to_response(
             'register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+            {'user_form': user_form, 'profile_form': profile_form,
+             'registered': registered},
             context)
 
 def user_login(request):
@@ -89,8 +95,8 @@ def user_login(request):
         user = authenticate(username=username, password=password)
 
         # If we have a User object, the details are correct.
-        # If None (Python's way of representing the absence of a value), no user
-        # with matching credentials was found.
+        # If None (Python's way of representing the absence of a value),
+        # no user with matching credentials was found.
         if user:
             # Is the account active? It could have been disabled.
             if user.is_active:
